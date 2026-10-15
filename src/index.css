@@ -1,0 +1,79 @@
+@import 'tailwindcss';
+@import '@heroui/react/styles';
+
+@theme {
+    --color-brand-50: #eef2fb;
+    --color-brand-100: #d9e1f4;
+    --color-brand-200: #b3c3e9;
+    --color-brand-300: #8ca5dd;
+    --color-brand-400: #5c7cc9;
+    --color-brand-500: #33559f;
+    --color-brand-600: #25407e;
+    --color-brand-700: #1e3150;
+    --color-brand-800: #16233a;
+    --color-brand-900: #0f1826;
+
+    --shadow-panel: 0 1px 2px rgba(15, 24, 38, 0.06), 0 8px 24px -12px rgba(15, 24, 38, 0.18);
+}
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(180deg, #eef1f8 0%, #e7ebf5 100%);
+}
+
+/*
+ * The OMICall SDK's own dialer widget ships an unscoped `html, body { ... }` stylesheet
+ * (margin, overflow:hidden, display:flex, background-color:#fff, ...) that it injects into
+ * the page once the call UI mounts (e.g. right after a successful register()). That stylesheet
+ * isn't wrapped in a Tailwind `@layer`, so per CSS cascade-layers rules it beats our layered
+ * utility classes regardless of specificity or load order — hence the page looking "broken"
+ * post-register. `!important` here is the one thing that reliably wins back these properties
+ * no matter when the SDK's CSS is injected.
+ */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0 !important;
+    display: block !important;
+    background: linear-gradient(180deg, #eef1f8 0%, #e7ebf5 100%) !important;
+}
+
+/* Thin scrollbars */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    margin: 4px;
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--bg-3);
+    border-radius: var(--radius-sm);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-border);
+}
+
+*::-webkit-scrollbar-corner {
+    background: transparent;
+}

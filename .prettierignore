@@ -1,0 +1,6 @@
+.claude/*
+.vscode/*
+.yarn/*
+dist/*
+libs/*
+**/build/*

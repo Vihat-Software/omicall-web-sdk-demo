@@ -1,0 +1,52 @@
+{
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "[svg]": {
+        "editor.defaultFormatter": "jock.svg"
+    },
+    "files.watcherExclude": {
+        "**/*.min.js": true
+    },
+    "search.exclude": {
+        "**/*.min.js": true
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.insertSpaces": true,
+    "editor.rulers": [
+        120
+    ],
+    "editor.tabSize": 4,
+    "sort-json.settings.objectSortType": "Key",
+    "sort-json.settings.sortMode": "Objects Only",
+    "svg.preview.background": "dark-transparent",
+    "liveServer.settings.port": 5501,
+    "tailwindCSS.classFunctions": [
+        "tw",
+        "clsx",
+        "tw\\.[a-z-]+"
+    ],
+    "[xml]": {
+        "editor.defaultFormatter": "redhat.vscode-xml"
+    },
+    "[typescript]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "[typescriptreact]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "[javascript]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "[javascriptreact]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    }
+}
