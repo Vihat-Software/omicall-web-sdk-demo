@@ -13,3 +13,6 @@ build/
 .yarn/install-state.gz
 .yarn/patches/
 .pnp.*
+
+# Local-only tooling (internal paths, never committed)
+*.local.mjs
