@@ -1,6 +1,6 @@
 export const DEFAULT_VERSION = {
     v2: '2.0.0',
-    v3: '3.0.46',
+    v3: '3.1.1',
 };
 
 export const V2_AUDIO_THEMES = ['default', 'salesforce', 'iframe'];

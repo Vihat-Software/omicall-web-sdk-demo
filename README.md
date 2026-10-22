@@ -7,7 +7,7 @@ A small React app for trying out the OMICall Web SDK in the browser. It loads th
 | **v2** | `window.omiSDK`     | `https://cdn.omicrm.com/sdk/<version>/sdk.min.js` (`sdk.dev.min.js` for the `dev` env) |
 | **v3** | `window.OMICallSDK` | `https://cdn.omicrm.com/sdk/web/<version>/core.min.js`                                 |
 
-Default versions: v2 `2.0.0`, v3 `3.0.46`.
+Default versions: v2 `2.0.0`, v3 `3.1.1`.
 
 ## Documentation
 
@@ -36,6 +36,15 @@ Your configuration is saved in `localStorage` and can also be shared through URL
 ```
 ?sdkSource=v3&sdkVersion=3.0.46&sipRealm=my-realm&sipUser=100
 ```
+
+Init/register options can be prefilled the same way with `<sdk>.<init|register>.<option>` keys (`advancedJson` is not supported). Booleans take `true`/`false`, arrays are comma-separated, and only non-default values are written back to the URL:
+
+```
+?v3.init.lng=vi&v3.init.dialPosition=left&v3.register.isGuest=true&v3.register.audioCodecs=opus,pcma
+?v2.init.theme=salesforce&v2.init.debug=true&v2.init.ringtoneVolume=0.5
+```
+
+URL values take precedence over `localStorage`.
 
 > The password is also written to the URL and `localStorage`. Don't share links or use shared browsers with real credentials.
 
