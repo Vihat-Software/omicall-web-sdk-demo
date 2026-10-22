@@ -2,10 +2,21 @@ import { useEffect, useReducer } from 'react';
 
 import { setByPath } from '../lib/pathUtils';
 import { loadPersistedState, savePersistedState } from '../lib/storage';
-import { readUrlParams, writeUrlParams } from '../lib/urlParams';
+import { readUrlOptions, readUrlParams, writeUrlParams } from '../lib/urlParams';
 
 import { DispatchContext, StateContext } from './contexts';
 import { createDefaultOptions, DEFAULT_VERSION } from './defaultOptions';
+
+function mergeOptions(base, overrides) {
+    return Object.fromEntries(
+        Object.entries(base).map(([version, groups]) => [
+            version,
+            Object.fromEntries(
+                Object.entries(groups).map(([group, values]) => [group, { ...values, ...overrides[version]?.[group] }])
+            ),
+        ])
+    );
+}
 
 function createInitialState() {
     const persisted = loadPersistedState() || {};
@@ -25,7 +36,7 @@ function createInitialState() {
         registerMessage: '',
         busy: false,
         logs: [],
-        options: { ...createDefaultOptions(), ...persisted.options },
+        options: mergeOptions({ ...createDefaultOptions(), ...persisted.options }, readUrlOptions()),
     };
 }
 
