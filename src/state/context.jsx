@@ -30,6 +30,7 @@ function createInitialState() {
         sipUser: urlParams.sipUser ?? persisted.sipUser ?? '',
         sipPassword: urlParams.sipPassword ?? persisted.sipPassword ?? '',
         phoneNumber: urlParams.phoneNumber ?? persisted.phoneNumber ?? '',
+        optionsTab: urlParams.optionsTab || 'init', // init | register
         scriptStatus: 'idle', // idle | loading | loaded | error
         sdkStatus: 'idle', // idle | initializing | ready | error
         registerStatus: 'idle', // idle | registering | registered | error

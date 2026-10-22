@@ -2,6 +2,9 @@ import { createDefaultOptions } from '../state/defaultOptions';
 
 const SYNCED_KEYS = ['sdkSource', 'sdkEnv', 'sdkVersion', 'sipRealm', 'sipUser', 'sipPassword', 'phoneNumber'];
 
+const OPTIONS_TABS = ['init', 'register'];
+const DEFAULT_OPTIONS_TAB = OPTIONS_TABS[0];
+
 // Free-form JSON is too bulky for a URL; everything else under options.* is syncable.
 const EXCLUDED_OPTION_KEYS = new Set(['advancedJson']);
 
@@ -41,7 +44,9 @@ function serializeOptionValue(value) {
 
 export function readUrlParams() {
     const params = Object.fromEntries(new URLSearchParams(window.location.search));
-    return Object.fromEntries(SYNCED_KEYS.filter((key) => key in params).map((key) => [key, params[key]]));
+    const synced = Object.fromEntries(SYNCED_KEYS.filter((key) => key in params).map((key) => [key, params[key]]));
+    if (OPTIONS_TABS.includes(params.tab)) synced.optionsTab = params.tab;
+    return synced;
 }
 
 /** Options present in the URL, shaped like `state.options` ({ v3: { init: {...} } }) so they can be merged over it. */
@@ -67,6 +72,11 @@ export function writeUrlParams(state) {
             params.set(key, value);
         }
     });
+    if (state.optionsTab && state.optionsTab !== DEFAULT_OPTIONS_TAB) {
+        params.set('tab', state.optionsTab);
+    } else {
+        params.delete('tab');
+    }
     // Only non-default options are written, so the URL stays short.
     OPTION_KEYS.forEach(({ urlKey, version, group, key, fallback }) => {
         const value = state.options?.[version]?.[group]?.[key];

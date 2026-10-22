@@ -1,7 +1,6 @@
 import { Tabs } from '@heroui/react';
-import { useState } from 'react';
 
-import { useDemoState } from '../../state/hooks';
+import { useDemoState, useField } from '../../state/hooks';
 import { V2InitOptions } from '../options/V2InitOptions';
 import { V2RegisterOptions } from '../options/V2RegisterOptions';
 import { V3InitOptions } from '../options/V3InitOptions';
@@ -10,7 +9,7 @@ import { SectionCard } from '../ui/SectionCard';
 
 export function OptionsColumn() {
     const { sdkSource, sdkStatus, registerStatus } = useDemoState();
-    const [tab, setTab] = useState('init');
+    const [tab, setTab] = useField('optionsTab');
 
     const initLocked = sdkStatus === 'ready' || sdkStatus === 'initializing';
     const registerLocked = registerStatus === 'registered' || registerStatus === 'registering';
