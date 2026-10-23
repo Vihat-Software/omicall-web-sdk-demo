@@ -1,6 +1,6 @@
 import { Input, Label } from '@heroui/react';
 
-export function TextInputField({ name, label, value, onChange, placeholder, type = 'text', required, disabled, hint }) {
+export function TextInputField({ name, label, value, onChange, placeholder, type = 'text', required, disabled, hint, onEnter }) {
     return (
         <div
             data-name='TextInputField'
@@ -23,6 +23,11 @@ export function TextInputField({ name, label, value, onChange, placeholder, type
                 placeholder={placeholder}
                 disabled={disabled}
                 onChange={(event) => onChange?.(event.target.value)}
+                onKeyDown={(event) => {
+                    if (event.key === 'Enter' && !event.nativeEvent.isComposing) {
+                        onEnter?.(event);
+                    }
+                }}
             />
             {hint && <p className='text-xs text-slate-400'>{hint}</p>}
         </div>

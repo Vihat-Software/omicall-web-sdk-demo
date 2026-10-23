@@ -16,6 +16,7 @@ export function CallColumn() {
 
     const isRegistered = registerStatus === 'registered';
     const isV2 = sdkSource === 'v2';
+    const canCall = isRegistered && !!phoneNumber.trim();
 
     return (
         <SectionCard
@@ -43,13 +44,14 @@ export function CallColumn() {
                     onChange={(value) => dispatch({ type: 'SET_FIELD', path: 'phoneNumber', value })}
                     placeholder='e.g. 0000000000'
                     disabled={!isRegistered}
+                    onEnter={() => canCall && actions.makeCall()}
                 />
 
                 <div className='flex flex-wrap gap-2'>
                     <ActionButton
                         tone='info'
                         onClick={actions.makeCall}
-                        isDisabled={!isRegistered || !phoneNumber.trim()}
+                        isDisabled={!canCall}
                         className='flex-1 items-center gap-2'
                     >
                         <Phone size={16} />
