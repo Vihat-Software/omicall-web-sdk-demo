@@ -89,8 +89,8 @@ function setBusy(next) {
     return next;
 }
 
-async function makeCall(remoteNumber) {
-    return getGlobal().makeCall(remoteNumber);
+async function makeCall(remoteNumber, { isVideo } = {}) {
+    return getGlobal().makeCall(remoteNumber, isVideo ? { isVideo: true } : undefined);
 }
 
 function getVersion() {

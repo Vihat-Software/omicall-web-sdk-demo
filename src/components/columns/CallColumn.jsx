@@ -1,5 +1,6 @@
-import { Circle, Phone } from 'lucide-react';
+import { Circle, Phone, Video } from 'lucide-react';
 
+import { canVideoCall } from '../../lib/callUtils';
 import { useSdkActions } from '../../lib/useSdkActions';
 import { useDemoDispatch, useDemoState } from '../../state/hooks';
 import { ActionButton } from '../ui/ActionButton';
@@ -17,6 +18,7 @@ export function CallColumn() {
     const isRegistered = registerStatus === 'registered';
     const isV2 = sdkSource === 'v2';
     const canCall = isRegistered && !!phoneNumber.trim();
+    const canVideo = canCall && canVideoCall(phoneNumber);
 
     return (
         <SectionCard
@@ -50,13 +52,24 @@ export function CallColumn() {
                 <div className='flex flex-wrap gap-2'>
                     <ActionButton
                         tone='info'
-                        onClick={actions.makeCall}
+                        onClick={() => actions.makeCall()}
                         isDisabled={!canCall}
                         className='flex-1 items-center gap-2'
                     >
                         <Phone size={16} />
                         Click to call
                     </ActionButton>
+                    {!isV2 && (
+                        <ActionButton
+                            tone='success'
+                            onClick={() => actions.makeCall({ isVideo: true })}
+                            isDisabled={!canVideo}
+                            className='flex-1 items-center gap-2'
+                        >
+                            <Video size={16} />
+                            Video call
+                        </ActionButton>
+                    )}
                     {isV2 && (
                         <ActionButton
                             tone={busy ? 'success' : 'warning'}

@@ -102,10 +102,10 @@ export function useSdkActions() {
             }
         },
 
-        async makeCall() {
+        async makeCall({ isVideo = false } = {}) {
             try {
-                await adapter.makeCall(state.phoneNumber);
-                log('info', `Calling ${state.phoneNumber}...`);
+                await adapter.makeCall(state.phoneNumber, { isVideo });
+                log('info', `${isVideo ? 'Video calling' : 'Calling'} ${state.phoneNumber}...`);
             } catch (error) {
                 log('error', `makeCall failed: ${error.message || error}`);
                 toast.danger(error.message || 'Failed to place call');

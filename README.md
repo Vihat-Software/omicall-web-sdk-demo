@@ -29,7 +29,7 @@ Toolbar flow: **① Init SDK → ② Register → Unregister**.
 2. Fill in SIP realm, SIP user and SIP password (required to unlock Init).
 3. Adjust init/register options if needed.
 4. Click **Init SDK**, then **Register**. Watch the status chips and event log.
-5. Enter a phone number and click **Click to call**.
+5. Enter a phone number and click **Click to call**. With SDK v3 you can also click **Video call** for internal numbers (2-7 digits) or ZCC numbers (21-22 digits).
 
 Your configuration is saved in `localStorage` and can also be shared through URL query parameters: `sdkSource`, `sdkEnv`, `sdkVersion`, `sipRealm`, `sipUser`, `sipPassword`, `phoneNumber`. The URL is kept in sync as you edit, e.g.
 
